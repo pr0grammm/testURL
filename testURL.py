@@ -1,24 +1,28 @@
 import requests
 import sys
-# get a requests handle
-req = requests.get("http://www.heartnsoul.com/ascii_art/flowers.txt");
 
-# access status code using req.status_code
-print "status: "+str(req.status_code)
+try:
+	# get a requests handle
+	req = requests.get("http://www.heartnsoul.com/ascii_art/flowers.txt");
 
-# access text in body using req.text
-print "content:\n"+str(req.text)
+	# access status code using req.status_code
+	print "status: "+str(req.status_code)
 
-#get filename from user
-fname = sys.argv[1]
+	# access text in body using req.text
+	print "content:\n"+str(req.text)
 
-print fname
+	#get filename from user
+	fname = sys.argv[1]
 
-#open file for reading
-fopen = open(fname,'r')
+	print fname
 
-for x in fopen.readlines():
-	print x.strip('\n')
+	#open file for reading
+	fopen = open(fname,'r')
 
-print '\n'
+	for x in fopen.readlines():
+		print x.strip('\n')
 
+	print '\n'
+
+except Exception as e:
+	print e
