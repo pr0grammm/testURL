@@ -1,5 +1,5 @@
 import requests
-
+import sys
 # get a requests handle
 req = requests.get("http://www.heartnsoul.com/ascii_art/flowers.txt");
 
@@ -8,3 +8,8 @@ print "status: "+str(req.status_code)
 
 # access text in body using req.text
 print "content:\n"+str(req.text)
+
+#get filename from user
+fname = sys.argv[1]
+
+print fname
