@@ -12,7 +12,7 @@ try:
 	#do for every line in file
 	for line in fopen.readlines():
 		url=line.strip('\n')
-		req=requests.get(url)
+		req=requests.head(url)
 		print url
 		print str(req.status_code)
 		
