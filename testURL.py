@@ -13,3 +13,12 @@ print "content:\n"+str(req.text)
 fname = sys.argv[1]
 
 print fname
+
+#open file for reading
+fopen = open(fname,'r')
+
+for x in fopen.readlines():
+	print x.strip('\n')
+
+print '\n'
+
