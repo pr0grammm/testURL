@@ -1,23 +1,33 @@
 import requests
 import sys
 
-try:
-	#get filename from user
-	fname = sys.argv[1]
+file_name = sys.argv[1]
+fwrite = open('report.csv', 'w')
+fopen = open(file_name, 'r')
+counter = 0
 
+for line in fopen.readlines():
+    counter = counter + 1
+    url = line.strip('\n')
+    try:
+        req = requests.head(url)
+        success = 'true'
 
-	#open file for reading
-	fopen = open(fname,'r')
+    except Exception as e:
+        print e
+        success = 'false'
 
-	#do for every line in file
-	for line in fopen.readlines():
-		url=line.strip('\n')
-		req=requests.head(url)
-		print url
-		print str(req.status_code)
-		
+    if (success == 'false'):
+        fwrite.write('[-],' + str(counter) +',' + url +',' +'No Result' + '\n')	
+	
+    else:
+	code=str(req.status_code)
+    	if (code.startswith('2')):
+        	print ('[+] ' + url + ',' + code + '\n')
+        	fwrite.write('[+],' + str(counter) + ',' + url + ',' + code+ '\n')
+    	else:
+        	print ('[-] ' + url + ',' + code +'\n')
+        	fwrite.write('[-],' + str(counter) +',' + url + ',' + code + '\n')
 
-	fopen.close()
-
-except Exception as e:
-	print e
+fwrite.close()
+fopen.close()
